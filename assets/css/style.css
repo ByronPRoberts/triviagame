@@ -1,0 +1,19 @@
+body{
+background-image: url("C:/Users/Byron Roberts/desktop/class/homework/triviagame/assets/images/clipart-football-field-background-18.jpg")
+}
+header{
+text-emphasis: bold;
+color:red
+}
+.jumbotron{
+color:white;
+background: #3b653d;
+font-family:"Eraser";
+    src: url("../fonts/EraserDust.ttf") format("truetype"), 
+     url("../fonts/EraserDust.ttf") format("truetype");
+}
+@font-face {
+    font-family:"Eraser";
+    src: url("../fonts/EraserDust.ttf") format("truetype"), 
+     url("../fonts/EraserDust.ttf") format("truetype");
+}
