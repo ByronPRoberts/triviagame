@@ -74,6 +74,13 @@ var triviaArray = [{
         "Denver Broncos",
         "San Francisco 49ers"],
         "correctAnswer": "3"
+},{
+    "questionPrompt": "What NFL team scored the most points in a single SuperBowl?",
+        "answers": ["Dallas Cowboys",
+        "New England Patriots",
+        "Denver Broncos",
+        "San Francisco 49ers"],
+        "correctAnswer": "3"
 },
 
 ]
@@ -92,10 +99,12 @@ function newGame(){
 };
 
 function newQuestion(){
+    clearInterval(time);
     answered = false;
     var startDiv=$("#answerList");
-    $("#number").html("Question"+" "+(questionNum+1))
+    $("#number").html("Question"+" "+(questionNum+1));
     startDiv.html("<h4>"+triviaArray[questionNum].questionPrompt+"<h4>");
+    
     
 
     for(var i=0;i<4 ; i++){
@@ -109,33 +118,33 @@ function newQuestion(){
     setTimer();
     runTimer();
    
-    $("#answerList").on('click',function(){
+    $(".question").on('click',function(){
         
-        userInput=$(this).data("data-index")
+        userInput=$(this).attr("data-index")
         
         console.log(userInput);
         answered = true;
         answerCheck();
     })
-    runTimer();
+    
 };
 
 function setTimer(){
-    seconds=10;
+    seconds=11;
     $("#time").html('<h1>'+seconds+'<h1>');
-    time = setInterval(setTimer, 1000);
+    time = setInterval(runTimer, 1000);
 };
 function runTimer(){
     if(answered == false){
         seconds--;
         $("#time").html('<h1>'+seconds+'<h1')
     }
-     else if(seconds < 1){
+     if(seconds < 1){
         clearInterval(time);
-        // newQuestion();
+        newQuestion();
         unanswered++;
         questionNum++;
-        console.log(unanswered);
+        console.log("Unanwsered"+unanswered);
     }
 };
 function answerCheck(){
@@ -155,17 +164,34 @@ function answerCheck(){
         questionNum++;
         newQuestion();
     }
-    // else{
-    //     unanswered++;
-    //     answered = true;
+    else{
+        unanswered++;
+        answered = true;
         
         
-    // }
-    if(questionNum ==(triviaArray.length)-1){
+    }
+    if(questionNum == (triviaArray.length-1)){
         // show ending screen with score, wrong, and unanswered
+        $("#scoreMessage").text("Your final score is " + score);
+        var replay = $("<button>");
+        replay.text('Replay');
+        $("#replayButton").html(replay)
         // hide the <startDiv and the rest of the page
+        $("#time").hide();
+        $("#answerList").hide();
+        $("#number").hide();
     }
  }
+
+$("#replayButton").on("click",function(){
+    newGame();
+    $("#replayButton").hide();
+    $("#scoreMessage").hide();
+    $("#time").show();
+    $("#answerList").show();
+    $("#number").show();
+
+ })
 
 $(document).ready(function(){
     $("#startButton").on("click",function(){
