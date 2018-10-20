@@ -108,8 +108,8 @@ function newQuestion(){
     
 
     for(var i=0;i<4 ; i++){
-        var btn =$("<button>");
-        btn.addClass("btn-primary question choice"+i);
+        var btn =$("<button>" + "<br>");
+        btn.addClass(" question choice"+i);
         btn.attr({"data-index":i});
         btn.text(triviaArray[questionNum].answers[i]);
         $("#answerList").append(btn);
@@ -172,9 +172,10 @@ function answerCheck(){
     }
     if(questionNum == (triviaArray.length-1)){
         // show ending screen with score, wrong, and unanswered
-        $("#scoreMessage").text("Your final score is " + score);
+        $("#scoreMessage").text("You scored " + score + " Touchdowns!");
         var replay = $("<button>");
         replay.text('Replay');
+        $("#replayButton").addClass("btn-lg")
         $("#replayButton").html(replay)
         // hide the <startDiv and the rest of the page
         $("#time").hide();
